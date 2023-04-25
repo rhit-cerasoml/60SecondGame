@@ -148,12 +148,12 @@ public class EnemyMovement : MonoBehaviour
         RaycastHit2D hits = Physics2D.Raycast(transform.position, direction_to_player);
 
         //Debug.LogFormat("I see {0}", hits.transform.name);
-        PlayerInfo pi = hits.transform.GetComponent<PlayerInfo>();
+/*        PlayerInfo pi = hits.transform.GetComponent<PlayerInfo>();
         if (pi == null)
         {
             //Debug.Log("Not a player!");
             return false;
-        }
+        }*/
         return true;
     }
 

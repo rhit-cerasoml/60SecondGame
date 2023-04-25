@@ -6,9 +6,14 @@ using TMPro;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] GameObject player_prefab;
+
     [SerializeField] private int _score;
     [SerializeField] public TMP_Text _score_text;
+
     [SerializeField] Camera cameraReference;
+
+    [SerializeField] public float time = 60.0f;
+    [SerializeField] public TMP_Text _time_text;
 
 
     GameObject _player;
@@ -37,7 +42,13 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        
+        time -= Time.deltaTime;
+        _time_text.text = ((int) time).ToString();
+
+        if (time <= 0.0f)
+        {
+            timerEnded();
+        }
     }
 
     public GameObject GetPlayer()
@@ -63,5 +74,10 @@ public class GameManager : Singleton<GameManager>
 
     public Camera getPlayerCamera(){
         return cameraReference;
+    }
+
+    public void timerEnded()
+    {
+        Debug.Log("Gameover");
     }
 }
