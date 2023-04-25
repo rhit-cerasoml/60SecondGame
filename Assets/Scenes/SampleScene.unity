@@ -155,6 +155,7 @@ MonoBehaviour:
   player_prefab: {fileID: 2806498996144908983, guid: 2c23b36ee21d28d409143d6a4cbb447e, type: 3}
   _score: 0
   _score_text: {fileID: 0}
+  cameraReference: {fileID: 519420031}
 --- !u!4 &50254650
 Transform:
   m_ObjectHideFlags: 0
@@ -2533,7 +2534,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754378410}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1410584786}
