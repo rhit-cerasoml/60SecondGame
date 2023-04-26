@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_prefab: {fileID: 2806498996144908983, guid: 2c23b36ee21d28d409143d6a4cbb447e, type: 3}
+  enemy_prefab: {fileID: 4091851290054953659, guid: b67bb7754922dc54b94b868ff9f1d10f, type: 3}
   _score: 0
   _score_text: {fileID: 0}
   cameraReference: {fileID: 519420031}
