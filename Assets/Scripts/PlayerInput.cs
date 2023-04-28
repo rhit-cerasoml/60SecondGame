@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class PlayerInput : MonoBehaviour {
 
     public float speed = 4.5f;
@@ -16,12 +18,21 @@ public class PlayerInput : MonoBehaviour {
     private Rigidbody2D body;
     private CircleCollider2D _collider;
 
+    private AudioSource _audio_source;
+    private bool _grounded = false;
+    private bool _is_walking = false;
+    private bool _is_walk_playing = false;
+
+    [SerializeField] AudioClip sound_land;
+    [SerializeField] AudioClip sound_jump;
+    [SerializeField] AudioClip sound_walk;
+
     // Start is called before the first frame update
     void Start() {
         _camera = GameManager.Instance.getPlayerCamera();
         body = GetComponent<Rigidbody2D>();
         _collider = GetComponent<CircleCollider2D>();
-        
+        _audio_source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -40,9 +51,22 @@ public class PlayerInput : MonoBehaviour {
 
         bool grounded = hit != null;
 
+        if(grounded && !_grounded){
+            _audio_source.PlayOneShot(sound_land);
+        }
+        _grounded = grounded;
+
+
         Vector3 vel = body.velocity;
         if(grounded && vel.y == 0){
             JumpsLeft = JumpCount;
+        }
+
+        _is_walking = Mathf.Abs(deltaX) > 0.1f;
+
+        if(grounded && _is_walking && !_is_walk_playing){
+            _is_walk_playing = true;
+            StartCoroutine(WalkSound());
         }
 
         if((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && JumpsLeft > 0){
@@ -50,7 +74,16 @@ public class PlayerInput : MonoBehaviour {
             body.velocity = vel;
             body.AddForce(Vector2.up * jumpForce, jumpMode);
             JumpsLeft--;
+            _audio_source.PlayOneShot(sound_jump);
         }
+    }
+
+    IEnumerator WalkSound() {
+        while(_grounded && _is_walking){
+            _audio_source.PlayOneShot(sound_walk);
+            yield return new WaitForSeconds(0.3f + Random.Range(-0.1f, 0.1f));
+        }
+        _is_walk_playing = false;
     }
 
     void FixedUpdate(){

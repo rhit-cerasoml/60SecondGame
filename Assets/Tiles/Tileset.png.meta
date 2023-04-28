@@ -300,7 +300,6 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: 8}
         - {x: -8, y: 2}
-        - {x: -7, y: 2}
         - {x: -7, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: 8}
@@ -349,7 +348,6 @@ TextureImporter:
       - - {x: -8, y: 8}
         - {x: -8, y: -8}
         - {x: 7, y: -8}
-        - {x: 7, y: 2}
         - {x: 8, y: 2}
         - {x: 8, y: 8}
       tessellationDetail: 0
