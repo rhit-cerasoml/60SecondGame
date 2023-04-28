@@ -8,7 +8,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject player_prefab;
     [SerializeField] GameObject enemy_prefab;
 
-    [SerializeField] private int _score;
+    private int _score;
     [SerializeField] public TMP_Text _score_text;
 
     [SerializeField] Camera cameraReference;
@@ -38,6 +38,7 @@ public class GameManager : Singleton<GameManager>
         _score = 0;
         //gameObject.GetComponent<AudioSource>().Play();
         _player = Instantiate(player_prefab);
+        _player.
         _enemy = Instantiate(enemy_prefab);
     }
 
