@@ -10,15 +10,6 @@ public class RoomTemplate : MonoBehaviour {
 
     [SerializeField] int entrance_height;
     [SerializeField] int exit_height;
-    
-    
-    void Start() {
-        
-    }
-
-    void Update() {
-        
-    }
 
     public void Stamp(int x_offset, int y_offset, Transform destination){
         Transform grid = transform.GetChild(0);

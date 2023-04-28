@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameManager : Singleton<GameManager>
-{
+public class GameManager : Singleton<GameManager> {
     [SerializeField] GameObject player_prefab;
     [SerializeField] GameObject enemy_prefab;
 
@@ -13,74 +12,80 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] Camera cameraReference;
 
-    [SerializeField] public float time = 60.0f;
-    [SerializeField] public TMP_Text _time_text;
 
+    private float _time;
+    [SerializeField] public TMP_Text _time_text;
+    [SerializeField] public float run_time;
 
     GameObject _player;
     GameObject _enemy;
 
 
-    public int Score_Count
-    {
+    public int Score_Count {
         get => _score;
-        set
-        {
+        set {
             _score = value;
             _score_text.text = _score.ToString();
         }
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
+        Setup();
+    }
 
+    void Cleanup() {
+        Destroy(_player);
+        Destroy(_enemy);
+        RoomManager.Instance.Cleanup();
+    }
+
+    void Setup() {
         _score = 0;
-        //gameObject.GetComponent<AudioSource>().Play();
+        _time = run_time;
         _player = Instantiate(player_prefab);
-        _player.
+        _player.transform.position = new Vector3(7.5f, 2.5f, -1f);
         _enemy = Instantiate(enemy_prefab);
+        RoomManager.Instance.Setup();
+    }
+
+    void Restart() {
+        Cleanup();
+        Setup();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        time -= Time.deltaTime;
-        _time_text.text = ((int) time).ToString();
+    void Update() {
+        _time -= Time.deltaTime;
+        _time_text.text = ((int) _time).ToString();
 
-        if (time <= 0.0f)
-        {
+        if (_time <= 0.0f) {
             timerEnded();
         }
     }
 
-    public GameObject GetPlayer()
-    {
+    public GameObject GetPlayer() {
         return _player;
     }
 
-    public void IncrementScoreCount()
-    {
+    public void IncrementScoreCount() {
         _score += 1;
         Debug.LogFormat("killed {0}", _score);
     }
 
-    public void loadWalkAudio()
-    {
+    public void loadWalkAudio() {
 
     }
 
-    public void loadDieAudio()
-    {
+    public void loadDieAudio() {
 
     }
 
-    public Camera getPlayerCamera(){
+    public Camera getPlayerCamera() {
         return cameraReference;
     }
 
-    public void timerEnded()
-    {
-        Debug.Log("Gameover");
+    public void timerEnded() {
+        Restart();
     }
 }

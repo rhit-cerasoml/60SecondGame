@@ -11,6 +11,14 @@ public class RoomManager : Singleton<RoomManager>{
         startingRoom.transform.GetComponent<RoomTemplate>().Stamp(0, 0, grid);
     }
 
+    public void Cleanup(){
+        
+    }
+
+    public void Setup(){
+
+    }
+
     void Update() {
         
     }
