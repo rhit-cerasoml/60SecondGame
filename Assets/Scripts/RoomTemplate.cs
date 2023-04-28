@@ -5,11 +5,11 @@ using UnityEngine.Tilemaps;
 
 public class RoomTemplate : MonoBehaviour {
 
-    [SerializeField] int height;
-    [SerializeField] int width;
+    [SerializeField] public int height;
+    [SerializeField] public int width;
 
-    [SerializeField] int entrance_height;
-    [SerializeField] int exit_height;
+    [SerializeField] public int entrance_height;
+    [SerializeField] public int exit_height;
 
     public void Stamp(int x_offset, int y_offset, Transform destination){
         Transform grid = transform.GetChild(0);
@@ -24,17 +24,18 @@ public class RoomTemplate : MonoBehaviour {
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
                 Vector3Int pos = new Vector3Int(x, y, 0);
+                Vector3Int D_pos = new Vector3Int(x + x_offset, y + y_offset, 0);
                 TileBase tile = foreground.GetTile(pos);
                 if(tile != null){
-                    D_foreground.SetTile(pos, tile);
+                    D_foreground.SetTile(D_pos, tile);
                 }
                 tile = midground.GetTile(pos);
                 if(tile != null){
-                    D_midground.SetTile(pos, tile);
+                    D_midground.SetTile(D_pos, tile);
                 }
                 tile = background.GetTile(pos);
                 if(tile != null){
-                    D_background.SetTile(pos, tile);
+                    D_background.SetTile(D_pos, tile);
                 }
             }
         }
