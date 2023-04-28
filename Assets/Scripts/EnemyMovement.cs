@@ -3,37 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyMovement : MonoBehaviour
-{
+[RequireComponent(typeof(CircleCollider2D))]
+
+public class EnemyMovement : MonoBehaviour {
     public Transform Player;
-    int MoveSpeed = 4;
-    int MaxDist = 10;
-    int MinDist = 5;
+
+    [SerializeField] float ray_angle;
+    [SerializeField] float speed;
+    bool _direction = true;
+
+    private CircleCollider2D _collider;
 
 
 
-
-    void Start()
-    {
-
+    void Start() {
+        _collider = GetComponent<CircleCollider2D>();
     }
 
-    void Update()
-    {
-        transform.LookAt(Player);
-
-        if (Vector3.Distance(transform.position, Player.position) >= MinDist)
-        {
-
-            transform.position += transform.forward * MoveSpeed * Time.deltaTime;
-
-
-
-            if (Vector3.Distance(transform.position, Player.position) <= MaxDist)
-            {
-                //Here Call any function U want Like Shoot at here or something
+    void Update() {
+        
+        Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, ray_angle) * Vector3.down, Color.green);
+        Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, -ray_angle) * Vector3.down, Color.green);
+        
+        if(_direction){
+            RaycastHit2D[] hits = new RaycastHit2D[1];
+            int ray_hits = _collider.Raycast(Quaternion.Euler(0, 0, ray_angle) * Vector3.down, hits, 1.0f);
+            if(ray_hits == 0){
+                _direction = !_direction;
+            }else{
+                transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
-
+        }else{
+            RaycastHit2D[] hits = new RaycastHit2D[1];
+            int ray_hits = _collider.Raycast(Quaternion.Euler(0, 0, -ray_angle) * Vector3.down, hits, 1.0f);
+            if(ray_hits == 0){
+                _direction = !_direction;
+            }else{
+                transform.Translate(Vector3.left * speed * Time.deltaTime);
+            }
         }
+
     }
 }

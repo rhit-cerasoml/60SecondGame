@@ -11,6 +11,8 @@ public class RoomTemplate : MonoBehaviour {
     [SerializeField] public int entrance_height;
     [SerializeField] public int exit_height;
 
+    [SerializeField] public Vector2Int[] spawns;
+
     public void Stamp(int x_offset, int y_offset, Transform destination){
         Transform grid = transform.GetChild(0);
         Tilemap foreground = grid.GetChild(0).gameObject.GetComponent<Tilemap>();
@@ -38,6 +40,15 @@ public class RoomTemplate : MonoBehaviour {
                     D_background.SetTile(D_pos, tile);
                 }
             }
+        }
+    }
+
+    public void GenerateSpawns(int x_offset, int y_offset, GameObject[] prefabs, List<GameObject> enemies){
+        for(int i = 0; i < spawns.Length; i++){
+            Vector3 pos = new Vector3(x_offset + spawns[i].x - 0.5f, y_offset + spawns[i].y + 0.5f, 1.0f);
+            GameObject enemy = Instantiate(prefabs[Random.Range(0, prefabs.Length)]);
+            enemy.transform.position = pos;
+            enemies.Add(enemy);
         }
     }
 }

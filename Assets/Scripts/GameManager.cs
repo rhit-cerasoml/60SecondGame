@@ -5,7 +5,6 @@ using TMPro;
 
 public class GameManager : Singleton<GameManager> {
     [SerializeField] GameObject player_prefab;
-    [SerializeField] GameObject enemy_prefab;
 
     private int _score;
     [SerializeField] public TMP_Text _score_text;
@@ -18,8 +17,6 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField] public float run_time;
 
     GameObject _player;
-    GameObject _enemy;
-
 
     public int Score_Count {
         get => _score;
@@ -36,7 +33,6 @@ public class GameManager : Singleton<GameManager> {
 
     void Cleanup() {
         Destroy(_player);
-        Destroy(_enemy);
         RoomManager.Instance.Cleanup();
     }
 
@@ -45,7 +41,6 @@ public class GameManager : Singleton<GameManager> {
         _time = run_time;
         _player = Instantiate(player_prefab);
         _player.transform.position = new Vector3(7.5f, 2.5f, -1f);
-        _enemy = Instantiate(enemy_prefab);
         RoomManager.Instance.Setup();
     }
 
