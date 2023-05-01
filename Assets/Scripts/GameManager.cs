@@ -22,7 +22,7 @@ public class GameManager : Singleton<GameManager> {
         get => _score;
         set {
             _score = value;
-            _score_text.text = _score.ToString();
+            _score_text.text = "Score: " + _score.ToString();
         }
     }
 
@@ -54,6 +54,8 @@ public class GameManager : Singleton<GameManager> {
         _time -= Time.deltaTime;
         _time_text.text = ((int) _time).ToString();
 
+        //IncrementScoreCount();
+
         if (_time <= 0.0f) {
             timerEnded();
         }
@@ -64,16 +66,15 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void IncrementScoreCount() {
-        _score += 1;
+        Score_Count += 1;
         Debug.LogFormat("killed {0}", _score);
     }
 
-    public void loadWalkAudio() {
-
-    }
-
-    public void loadDieAudio() {
-
+    public void DecrementScoreCount()
+    {
+        Score_Count -= 1;
+        
+        Debug.LogFormat("killed {0}", _score);
     }
 
     public Camera getPlayerCamera() {
