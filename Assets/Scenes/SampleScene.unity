@@ -5153,7 +5153,8 @@ MonoBehaviour:
   width: 15
   entrance_height: 2
   exit_height: 2
-  spawns: []
+  spawns:
+  - {x: 0, y: 0}
 --- !u!1 &876572716
 GameObject:
   m_ObjectHideFlags: 0
@@ -14740,9 +14741,9 @@ RectTransform:
   m_Father: {fileID: 1098835080}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: -173}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -218, y: 60}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1612793837
